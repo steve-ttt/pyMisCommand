@@ -10,24 +10,29 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
 class ExplodeEL(pygame.sprite.Sprite):
-    def __init__(self, colour, width, height):
+    implode = False
+    startw = 8
+    starth = 4
+    def __init__(self):
         """ Exploding elipse constructor, for use in missle command game
             Instantiate with colour, height and width """
         super(ExplodeEL,self).__init__()
-        self.image = pygame.Surface([width, height] )
-        self.image.fill(colour)
-        #update the position of this object by setting the values of
-        # rect.x and rect.y
+        self.image = pygame.image.load("assets/exp.png").convert_alpha()
         self.rect = self.image.get_rect()
 
     def update(self):
         #called each frame
-        #todo make it expand and contract
-        #print('at update x: %s y: %s ' % (self.rect.x, self.rect.y))
-        #self.rect.y += 1
-        if self.rect.x <0 or self.rect.x > 800:
-            print('killing sprite')
-            self.kill()
-        if self.rect.y < 0 or self.rect.y > 600:
-            print('killing sprite')
+        if self.implode == False:
+            self.startw += 2
+            self.starth += 2
+            self.image = pygame.image.load("assets/exp.png").convert_alpha()
+            self.image = pygame.transform.scale(self.image,(self.startw,self.starth))
+        if self.startw >= 80:
+            self.implode = True
+        if self.implode == True:
+            self.startw -= 2
+            self.starth -= 2
+            self.image = pygame.image.load("assets/exp.png").convert_alpha()
+            self.image = pygame.transform.scale(self.image,(self.startw,self.starth))
+        if self.startw <= 4:
             self.kill()

@@ -40,7 +40,11 @@ textCoord.center = (50, 10)
 all_sprites = pygame.sprite.Group()
 explosions = pygame.sprite.Group()
 
-
+## sounds
+#music = pygame.mixer.music.load("assets/Pocket Destroyer.mp3")
+#musicVol = 0.5
+#music.play(loops=-1, start=0.0)
+#music.set_volume(musicVol)
 ## Game loop
 running = True
 while running:
@@ -57,7 +61,7 @@ while running:
             textSurfaceObj = fontObj.render(mouseStr, True, GREEN, BLACK)
         elif event.type == MOUSEBUTTONUP:
             mousex, mousey = event.pos
-            new_expl = ExplodeEL(RED, 80, 40)
+            new_expl = ExplodeEL()
             new_expl.rect.x = mousex
             new_expl.rect.y = mousey
             explosions.add(new_expl)
